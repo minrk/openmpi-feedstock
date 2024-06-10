@@ -1,34 +1,9 @@
 if [[ "${CONDA_BUILD:-}" = "1" ]]; then
   echo "setting openmpi environment variables for conda-build"
-  if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" = "1" ]]; then
-    # set compilation variables during cross compilation
-    for _var in CC CXX FC; do
-      if [[ ! -z "${!_var:-}" ]]; then
-        echo "OMPI_${_var}=${!_var}"
-        export OMPI_${_var}="${!_var}"
-      fi
-    done
-    # require pkg-config?
-    if [[ -z "${OMPI_CFLAGS:-}" ]]; then
-      # pkg-config --cflags ompi
-      export OMPI_CFLAGS="-I$PREFIX/include"
-    fi
-    if [[ -z "${OMPI_CXXFLAGS:-}" ]]; then
-      # pkg-config --cflags ompi-cxx
-      export OMPI_CXXFLAGS="-I$PREFIX/include"
-    fi
-    if [[ -z "${OMPI_FCFLAGS:-}" ]]; then
-      # pkg-config --cflags ompi-fort
-      export OMPI_FCFLAGS="-I$PREFIX/include"
-    fi
-    if [[ -z "${OMPI_LDFLAGS:-}" ]]; then
-      # pkg-config --libs-only-L --libs-only-other ompi
-      export OMPI_LDFLAGS="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib"
-      if [[ "${target_platform:-}" == linux-* ]]; then
-        export OMPI_LDFLAGS="${OMPI_LDFLAGS} -Wl,--allow-shlib-undefined"
-      fi
-    fi
-    export OPAL_PREFIX="$PREFIX"
+  if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" = "1" && "${CONDA_PREFIX}" == "${BUILD_PREFIX:-}" ]]; then
+      echo "WARNING: openmpi installed in build environment for cross compilation."
+      echo "  This is no longer necessary."
+      echo "  Remove 'openmpi' from build dependencies, but 'perl' may need to be added."
   fi
 
   # runtime variables

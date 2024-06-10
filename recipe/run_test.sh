@@ -34,7 +34,7 @@ fi
 
 if [[ $PKG_NAME == "openmpi-mpicc" ]]; then
   command -v mpicc
-  mpicc -show
+  mpicc -showme
 
   env | grep OMPI
 
@@ -49,7 +49,7 @@ fi
 
 if [[ $PKG_NAME == "openmpi-mpicxx" ]]; then
   command -v mpicxx
-  mpicxx -show
+  mpicxx -showme
 
   test -z "${OMPI_CXX:-}"
   test -z "${OMPI_CXXFLAGS:-}"
@@ -60,7 +60,7 @@ fi
 
 if [[ $PKG_NAME == "openmpi-mpifort" ]]; then
   command -v mpifort
-  mpifort -show
+  mpifort -showme
   
   test -z "${OMPI_FC:-}"
   test -z "${OMPI_FCFLAGS:-}"
@@ -72,13 +72,13 @@ if [[ $PKG_NAME == "openmpi-mpifort" ]]; then
   $MPIEXEC -n 4 ./helloworld1_f90
 
   command -v mpif77
-  mpif77 -show
+  mpif77 -showme
 
   mpif77 helloworld.f -o helloworld2_f
   $MPIEXEC -n 4 ./helloworld2_f
 
   command -v mpif90
-  mpif90 -show
+  mpif90 -showme
 
   mpif90 helloworld.f90 -o helloworld2_f90
   $MPIEXEC -n 4 ./helloworld2_f90

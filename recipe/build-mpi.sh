@@ -59,6 +59,7 @@ fi
 ./configure --prefix=$PREFIX \
             --disable-dependency-tracking \
             --enable-mpi-fortran \
+            --enable-script-wrapper-compilers \
             --disable-wrapper-rpath \
             --disable-wrapper-runpath \
             --with-wrapper-cflags="-I$PREFIX/include" \

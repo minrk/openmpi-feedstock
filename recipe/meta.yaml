@@ -94,8 +94,8 @@ outputs:
         - {{ stdlib('c') }}
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
-        # host C compilers work fine (better) on mac
         - {{ compiler('c') }}
+        - perl
     test:
       script: run_test.sh
       files:
@@ -113,8 +113,8 @@ outputs:
         - {{ stdlib('c') }}
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
-        # host C compilers work fine (better) on mac
         - {{ compiler('cxx') }}
+        - perl
     test:
       script: run_test.sh
       files:
@@ -133,6 +133,7 @@ outputs:
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         - {{ compiler('fortran') }}
+        - perl
     test:
       script: run_test.sh
       files:
